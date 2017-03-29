@@ -1,0 +1,30 @@
+{
+  "name": "react-express",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "express": "^4.15.2",
+    "morgan": "^1.8.1",
+    "oauth": "^0.9.15",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
+    "twit": "^2.2.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "mz": "^2.6.0",
+    "react-scripts": "0.9.5",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "mocha test",
+    "eject": "react-scripts eject"
+  }
+}

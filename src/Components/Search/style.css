@@ -1,0 +1,12 @@
+.Search{
+  display:flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  flex-direction: column;
+}
+
+.Search > div{
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-around;
+}
