@@ -1,7 +1,24 @@
 const Twit = require('twit')
-const OAuth2 = require('OAuth').OAuth2
 const https = require('https')
+const request = require('request')
 const userCredentials = require('../config/credentials.js') //TODO, change this to process.ENV
+const authorizationHeader = {}
+
+// get the token and save it to authorizationHeader to use it in all the requests
+request({
+  url: 'https://api.twitter.com/oauth2/token',
+  method: 'POST',
+  auth: {
+    user: userCredentials.access_key,
+    pass: userCredentials.secret_key
+  },
+  form: {
+    'grant_type': 'client_credentials'
+  }
+}, (err, res) => {
+  const json = JSON.parse(res.body)
+  authorizationHeader.Authorization = 'Bearer ' + json.access_token
+})
 
 // global variable just to provide the twitter endpoints
 const TwitterConfig = {
@@ -11,23 +28,6 @@ const TwitterConfig = {
   followingEndPoint: '/1.1/friends/list.json'
 }
 
-// create aouth2 instance
-const oauth2 = new OAuth2(
-  userCredentials.access_key,
-  userCredentials.secret_key,
-  `https://${TwitterConfig.hostname}/`,
-  null,
-  'oauth2/token',
-  null
- )
-
-const authorizationHeader = {}
-
-// get the token and save it to authorizationHeader to use it in all the requests
-oauth2.getOAuthAccessToken('', {'grant_type': 'client_credentials'}, (e, access_token) => {
-  //string that we can use to authenticate request
-  authorizationHeader.Authorization = 'Bearer ' + access_token
-})
 
 // get the followers for a given userName
 exports.getFollowers = (req, res, next) => {
